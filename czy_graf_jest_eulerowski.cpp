@@ -5,8 +5,6 @@
 using namespace std;
 
 int a, w, s, x, b, q, jest;
-string test = "nie";
-// int h = 0;
 int o = 0, do_warunku = 0, warunek = 0;
 int z = 0, sto = 1;
 char tabe[27] = "abcdefghijklmnopqrstuvwxyz";
