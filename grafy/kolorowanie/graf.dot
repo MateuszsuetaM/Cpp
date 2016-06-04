@@ -1,0 +1,128 @@
+graph graf{
+a -- b;
+a -- d;
+a -- g;
+
+b -- f;
+b -- h;
+b -- i;
+
+c -- e;
+c -- f;
+c -- g;
+
+d -- g;
+d -- h;
+d -- i;
+
+
+f -- g;
+f -- i;
+
+g -- h;
+
+
+
+a[style="filled" fillcolor="green"]
+b[style="filled" fillcolor="blue"]
+c[style="filled" fillcolor="green"]
+d[style="filled" fillcolor="blue"]
+e[style="filled" fillcolor="blue"]
+f[style="filled" fillcolor="yellow"]
+g[style="filled" fillcolor="black"]
+h[style="filled" fillcolor="green"]
+i[style="filled" fillcolor="green"]
+} c;
+b -- c;
+b -- c;
+b -- c;
+b -- d;
+b -- d;
+b -- e;
+b -- e;
+b -- f;
+b -- f;
+b -- g;
+b -- g;
+b -- h;
+b -- h;
+b -- i;
+b -- i;
+b -- j;
+b -- j;
+
+c -- d;
+c -- d;
+c -- e;
+c -- e;
+c -- f;
+c -- f;
+c -- g;
+c -- g;
+c -- h;
+c -- h;
+c -- i;
+c -- i;
+c -- j;
+c -- j;
+
+d -- e;
+d -- e;
+d -- f;
+d -- f;
+d -- g;
+d -- g;
+d -- h;
+d -- h;
+d -- i;
+d -- i;
+d -- j;
+d -- j;
+
+e -- f;
+e -- f;
+e -- g;
+e -- g;
+e -- h;
+e -- h;
+e -- i;
+e -- i;
+e -- j;
+e -- j;
+
+f -- g;
+f -- g;
+f -- h;
+f -- h;
+f -- i;
+f -- i;
+f -- j;
+f -- j;
+
+g -- h;
+g -- h;
+g -- i;
+g -- i;
+g -- j;
+g -- j;
+
+h -- i;
+h -- i;
+h -- j;
+h -- j;
+
+i -- j;
+i -- j;
+
+
+a[style="filled" fillcolor="green"]
+b[style="filled" fillcolor="blue"]
+c[style="filled" fillcolor="yellow"]
+d[style="filled" fillcolor="black"]
+e[style="filled" fillcolor="pink"]
+f[style="filled" fillcolor="khaki"]
+g[style="filled" fillcolor="silver"]
+h[style="filled" fillcolor="brown"]
+i[style="filled" fillcolor="orange"]
+j[style="filled" fillcolor="beige"]
+}
