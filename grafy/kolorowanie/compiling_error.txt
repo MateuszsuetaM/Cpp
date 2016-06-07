@@ -1,3 +1,0 @@
-/usr/bin/ld:/home/mateusz/Cpp/grafy/kolorowanie/graf.dot: file format not recognized; treating as linker script
-/usr/bin/ld:/home/mateusz/Cpp/grafy/kolorowanie/graf.dot:1: syntax error
-collect2: error: ld returned 1 exit status
