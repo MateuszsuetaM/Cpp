@@ -21,11 +21,11 @@ int main() {
   for (pss; pss <= pkk; pss++) {
     if (pss == pkk) {
       end = dkk;
-      dss = 000;
     }
     for (dss += 1; dss < end; dss++) {
 
       cout << pss << "-" << setfill('0') << setw(3) << dss << endl;
     }
+    dss = 000;
   }
 }
