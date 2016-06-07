@@ -1,9 +1,7 @@
-#include <algorithm>
 #include <cstdio>
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
-
 using namespace std;
 
 int a, w, s, x, b, q, jest;
@@ -15,13 +13,13 @@ char tabe[27] = "abcdefghijklmnopqrstuvwxyz";
 void wypelnianie_tablicy(int *tab, int a, int *stos, int *odwiedzone,
                          int **stab, int *kolejnosc);
 void sprawdzanie_polaczen(int *tab, int a, int **stab);
-void wyswietlanie_macierzy(int a, int **stab, int *tab);
+void wyswietlanie_macierzy(int a, int **stab);
 void sprawdzanie_parzystosci_wierzcholkow(int *tab);
 void DFS(int x, int *stos, int jest, int do_warunku, int *odwiedzone, int sto,
          int z, int o, int **stab);
-void LF(int *tab, int a, int *kolejnosc);
-void lustereczko_powiedz_przecie(int b, int a);
+void LF(int *tab, int a, int *kolejnosc, int **stab);
 
+void lustereczko_powiedz_przecie(int b, int a);
 //------------------------------------------------------------------main
 int main() {
 
@@ -41,47 +39,49 @@ int main() {
 
   wypelnianie_tablicy(tab, a, stos, odwiedzone, stab, kolejnosc);
   sprawdzanie_polaczen(tab, a, stab);
-  wyswietlanie_macierzy(a, stab, tab);
+
+  wyswietlanie_macierzy(a, stab);
   sprawdzanie_parzystosci_wierzcholkow(tab);
-  if (q == 1) {
-    cout << "Podany graf nie jest eulerowski" << endl;
-    return 0;
-  }
-  cout << "Odwiedzone po 1 wierszu: ";
-  for (int c = 0; c < a; c++) {
-    cout << odwiedzone[c] << ", ";
-  }
-  cout << "Stos: ";
-  for (int c = 0; c < a; c++) {
-    cout << stos[c] << ", ";
-  }
-  DFS(x, stos, jest, do_warunku, odwiedzone, sto, z, o, stab);
-  int b = 0;
-  for (int c = 0; c < a; c++) {
-    b += odwiedzone[c];
-  }
-  cout << "Odwiedzone: ";
-  for (int c = 0; c < a; c++) {
-    cout << odwiedzone[c] << ", ";
-  }
-  cout << "Stos: ";
-  for (int c = 0; c < a; c++) {
-    cout << stos[c] << ", ";
-  }
-  LF(tab, a, kolejnosc);
-  lustereczko_powiedz_przecie(b, a);
+  // if (q == 1) {
+  //   cout << "Podany graf nie jest eulerowski" << endl;
+  //   return 0;
+  // }
+  // cout << "Odwiedzone po 1 wierszu: ";
+  // for (int c = 0; c < a; c++) {
+  //   cout << odwiedzone[c] << ", ";
+  // }
+  // cout << "Stos: ";
+  // for (int c = 0; c < a; c++) {
+  //   cout << stos[c] << ", ";
+  // }
+  // DFS(x, stos, jest, do_warunku, odwiedzone, sto, z, o, stab);
+  // int b = 0;
+  // for (int c = 0; c < a; c++) {
+  //   b += odwiedzone[c];
+  // }
+  // cout << "Odwiedzone: ";
+  // for (int c = 0; c < a; c++) {
+  //   cout << odwiedzone[c] << ", ";
+  // }
+  // cout << "Stos: ";
+  // for (int c = 0; c < a; c++) {
+  //   cout << stos[c] << ", ";
+  // }
+  LF(tab, a, kolejnosc, stab);
+
+  //  lustereczko_powiedz_przecie(b, a);
 }
-//------------- ---------------------------------------------ciała_funkcji
+//----------------------------------------------------------ciała_funkcji
 void wypelnianie_tablicy(int *tab, int a, int *stos, int *odwiedzone,
                          int **stab, int *kolejnosc) {
   for (int it = 0; it < a; it++) {
     tab[it] = 0;
     stos[it] = 0;
     odwiedzone[it] = 0;
-    kolejnosc[it] = it;
     for (int ir = 0; ir < a; ir++) {
       stab[ir][it] = 0;
     }
+    kolejnosc[it] = it;
   }
   stos[0] = 0;
   odwiedzone[0] = 1;
@@ -118,17 +118,13 @@ void sprawdzanie_polaczen(int *tab, int a, int **stab) {
   graf.close();
 }
 
-void wyswietlanie_macierzy(int a, int **stab, int *tab) {
+void wyswietlanie_macierzy(int a, int **stab) {
   for (int it = 0; it < a; it++) { // wyswietlanie macierzy
     for (int ir = 0; ir < a; ir++) {
       cout << stab[ir][it];
     }
     cout << endl;
   }
-  for (int iter = 0; iter < a; iter++) {
-    cout << tab[iter] << ", ";
-  }
-  cout << endl;
 }
 void sprawdzanie_parzystosci_wierzcholkow(int *tab) {
   for (int g = 0; g < a; g++) {
@@ -182,7 +178,7 @@ void DFS(int x, int *stos, int jest, int do_warunku, int *odwiedzone, int sto,
     z++;
   }
 }
-void LF(int *tab, int a, int *kolejnosc) {
+void LF(int *tab, int a, int *kolejnosc, int **stab) {
 
   for (int i = 0; i < a; i++) {
     for (int j = 0; j < a - 1; j++) {
@@ -192,22 +188,62 @@ void LF(int *tab, int a, int *kolejnosc) {
       }
     }
   }
+  int kolor[a];
+  for (int o = 0; o < a; o++) {
+    kolor[o] = 0;
+  }
+  int iterator = 0;
 
-  // wyswietlanieeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-  for (int f = 0; f < a; f++) {
-    cout << tab[f] << "-";
+  int warunek = 1;
+  //  int iterator2 = 0;
+
+  while (warunek < a) {
+    int iterator2 = 0;
+    int wielkosc_stosu = 0;
+    for (int u = 0; u < a; u++) {
+      wielkosc_stosu += stab[iterator][u];
+    }
+    int stos[wielkosc_stosu];
+    // kolor[0] = 1;
+    for (int w = 0; w < a; w++) {
+      if (stab[iterator][w] > 0) {
+        stos[iterator2] = w;
+        iterator2++;
+      }
+    }
+    for (int l = 0; l < wielkosc_stosu; l++) {
+      cout << stos[l] << "_";
+    }
+    cout << endl;
+    int r = 0;
+    int be = 0;
+    int kol = 1;
+
+    while (r < 1) {
+      //      if (stab[iterator][stos[be]] == kol) {
+      if (kolor[stos[be]] == kol)
+        kol++;
+      r++;
+    }
+    be++;
+    if (be == wielkosc_stosu) {
+
+      kolor[iterator] = kol;
+    }
   }
-  cout << endl;
-  for (int g = 0; g < a; g++) {
-    cout << kolejnosc[g] << "-";
-  }
-  cout << endl;
+  iterator++;
+  warunek++;
 }
-//----------------------------------------------------------------
-void lustereczko_powiedz_przecie(int b, int a) {
-  if (b == a) {
-    cout << "Graf jest ojlerowski!" << endl << endl << endl << endl;
-  } else {
-    cout << "Graf nie jest ojlerowski!" << endl << endl << endl << endl;
-  }
+for (int v = 0; v < a; v++) {
+  cout << kolor[v] << ":";
 }
+
+// cout << endl;
+}
+// // void lustereczko_powiedz_przecie(int b, int a) {
+// if (b == a) {
+//   cout << "Graf jest ojlerowski!" << endl << endl << endl << endl;
+// } else {
+//   cout << "Graf nie jest ojlerowski!" << endl << endl << endl << endl;
+// }
+//}

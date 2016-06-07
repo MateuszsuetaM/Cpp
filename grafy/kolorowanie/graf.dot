@@ -1,32 +1,25 @@
 graph graf{
+} -- b;
 a -- b;
+a -- c;
+a -- c;
 a -- d;
-a -- g;
+a -- d;
 
-b -- f;
-b -- h;
-b -- i;
+b -- c;
+b -- c;
+b -- d;
+b -- d;
 
-c -- e;
-c -- f;
-c -- g;
-
-d -- g;
-d -- h;
-d -- i;
-
-
-f -- g;
-f -- i;
-
-g -- h;
-
+c -- d;
+c -- d;
 
 
 a[style="filled" fillcolor="green"]
 b[style="filled" fillcolor="blue"]
-c[style="filled" fillcolor="green"]
-d[style="filled" fillcolor="blue"]
+c[style="filled" fillcolor="yellow"]
+d[style="filled" fillcolor="black"]
+}filled" fillcolor="blue"]
 e[style="filled" fillcolor="blue"]
 f[style="filled" fillcolor="yellow"]
 g[style="filled" fillcolor="black"]

@@ -1,0 +1,11 @@
+#include <iostream>
+
+using namespace std;
+int main(){
+int koniec=5;
+decimal wynik=2;
+for(wynik;wynik<koniec;wynik+=0.5){
+cout<<wynik<<endl;
+}
+
+}
